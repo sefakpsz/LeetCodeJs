@@ -1,40 +1,24 @@
-const longestCommonPrefix = (strs) => {
-    strs = strs.split(',')
+const longestCommonPrefix = (letters) => {
+    letters = letters.split(',')
     let counter = 0
-    let letter
-    let firstTime = true;
+    let letter = letters[0][0]
+    //let firstTime = true;
     let prefix = "";
-    for (let s of strs) {
-        s = s.trim()
-        letter = s[counter];
-        if (firstTime) {
-            firstTime = false;
-            continue;
-        }
-        if (letter === s[counter]) {
-            prefix += s[0]
-            counter++
-        }
+    for (let word of letters) {
+        word = word.trim()
+        if (word[counter] === letter)
+            prefix += letter[0]
         else
-            break;
+            break
+        counter++;
     }
 
-    if (counter) {
+    if (counter > 0) {
         console.log(prefix)
     }
     else {
         console.log("")
     }
-
-
-    // strs.forEach(s => {
-    //     firstLetter = s[0];
-    //     continue
-    //     if (counter !== 1) {
-    //         if (firstLetter === s[0])
-    //             counter++
-    //     }
-    // })
 }
 
 longestCommonPrefix("flower,flow,flight")
