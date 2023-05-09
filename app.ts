@@ -2,7 +2,6 @@ const longestCommonPrefix = (letters) => {
     letters = letters.split(',')
     let counter = 0
     let letter = letters[0][0]
-    //let firstTime = true;
     let prefix = "";
     for (let word of letters) {
         word = word.trim()
