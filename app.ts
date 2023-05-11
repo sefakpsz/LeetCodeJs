@@ -24,6 +24,7 @@ const longestCommonPrefix = (strs) => {
         return strs[0]
     else {
         for (let i = 1; i <= numberOfRepetition; i++) {
+            //if given string length is 1 we don't need to go into for loop
             if (longestCommon.length === minWordLength)
                 break;
 
