@@ -1,4 +1,4 @@
-const findMinSizeWord = async (myWords) => {
+const findMinSizeWord = (myWords) => {
     let minLenght = myWords[0].trim().length
 
     for (let word of myWords) {
@@ -10,44 +10,49 @@ const findMinSizeWord = async (myWords) => {
     return minLenght;
 }
 
-const longestCommonPrefix = async (strs) => {
+const longestCommonPrefix = (strs) => {
     let wordCounter = 0;
     let letterCounter = 0;
     let letter = "";
-    let minWordLength = await findMinSizeWord(strs);
+    let minWordLength = findMinSizeWord(strs);
     let numberOfRepetition = minWordLength * strs.length;
     let myStringLength = strs.length;
 
     let longestCommon = "";
 
-    for (let i = 1; i < numberOfRepetition; i++) {
-        //setting to letter which compare 
-        //and also
-        //reset to wordCounter which use for determining to which word is comparing right now
-        if (wordCounter === 0) {
-            letter = strs[wordCounter][letterCounter]
+    if (myStringLength === 1)
+        return strs[0]
+    else {
+        for (let i = 1; i <= numberOfRepetition; i++) {
+            if (longestCommon.length === minWordLength)
+                break;
+
+            //setting to letter which compare 
+            //and also
+            //reset to wordCounter which use for determining to which word is comparing right now
+            if (wordCounter === 0) {
+                letter = strs[wordCounter][letterCounter]
+                wordCounter++;
+            }
+
+            let currentLetter = strs[wordCounter][letterCounter]
+            if (letter === currentLetter) {
+                if (wordCounter === myStringLength - 1)
+                    longestCommon += letter;
+            }
+            else
+                break;
+
             wordCounter++;
-        }
 
-        let currentLetter = strs[wordCounter][letterCounter]
-        if (letter === currentLetter) {
-            if (wordCounter === myStringLength - 1)
-                longestCommon += letter;
+            //checking of is wordCounter value higher than lengthOfString
+            if (wordCounter === myStringLength) {
+                letterCounter++;
+                wordCounter = 0;
+            }
         }
-        else
-            break;
-
-        wordCounter++;
-
-        //checking of is wordCounter value higher than lengthOfString
-        if (wordCounter === myStringLength) {
-            letterCounter++;
-            wordCounter = 0;
-        }
+        return longestCommon
     }
-
-    console.log(longestCommon)
-    return `${longestCommon}`;
 }
 
-longestCommonPrefix(["flower", "flow", "flight"])
+console.log(longestCommonPrefix(["flower", "flow", "flight"]))
