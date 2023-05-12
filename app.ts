@@ -18,15 +18,24 @@ var isValid = (parantheses) => {
     //counter will be used to calculating of where is the peer of the current paranthes
     let counter = 0;
     for (let i = 0; i < parantheses.length; i += 2) {
+
+        //if next value is not peer of the first one, increase to counter with 1
         if (parantheses[i] !== dic[parantheses[i + 1]])
             counter++;
         else {
-            let firstIndex = 0
-            let lastIndex = (counter * 2) - 1
-            // adding of -1 is arrays start from 0 that's why after multiply or divide we need to substract with 1
+            if (counter > 0) {
+                let firstIndex = 0
+                // adding of -1 is arrays start from 0 that's why after multiply or divide we need to substract with 1
+                let lastIndex = (counter * 2) - 1
 
-            if (parantheses[firstIndex] !== dic[parantheses[lastIndex]])
-                return false;
+                while (lastIndex < firstIndex) {
+                    if (parantheses[firstIndex] !== dic[parantheses[lastIndex]])
+                        return false
+
+                    firstIndex++
+                    lastIndex--
+                }
+            }
         }
     }
     return true;
