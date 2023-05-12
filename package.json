@@ -6,9 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sefakpsz14/leetcodeJS.git"
+  },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/typescript": "^2.0.0"
-  }
+  "bugs": {
+    "url": "https://github.com/sefakpsz14/leetcodeJS/issues"
+  },
+  "homepage": "https://github.com/sefakpsz14/leetcodeJS#readme"
 }
