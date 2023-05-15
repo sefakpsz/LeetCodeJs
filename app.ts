@@ -24,21 +24,27 @@ var isValid = (parantheses) => {
         //if next value is not peer of the first one, increase to counter with 1
         if (parantheses[i] !== dic[parantheses[i + 1]])
             counter++;
-        else {
+        else if (i === parantheses.length - 1) {
             if (counter > 0) {
-                let firstIndex = 0
-                // adding of -1 is arrays start from 0 that's why after multiply or divide we need to substract with 1
-                let lastIndex = (counter * 2) - 1
 
-                while (lastIndex > firstIndex) {
-                    if (parantheses[firstIndex] !== dic[parantheses[lastIndex]])
-                        return false
-
-                    firstIndex++
-                    lastIndex--
-                }
-                counter = 0
             }
+
+
+
+            // if (counter > 0) {
+            //     let firstIndex = 0
+            //     // adding of -1 is arrays start from 0 that's why after multiply or divide we need to substract with 1
+            //     let lastIndex = (counter * 2) - 1
+
+            //     while (lastIndex > firstIndex) {
+            //         if (parantheses[firstIndex] !== dic[parantheses[lastIndex]])
+            //             return false
+
+            //         firstIndex++
+            //         lastIndex--
+            //     }
+            //     counter = 0
+            // }
         }
     }
 
@@ -60,7 +66,7 @@ var isValid = (parantheses) => {
     return true;
 };
 
-console.log(isValid("(){}[](("))
+console.log(isValid("{[]}()[]{[({})]}"))
 
 //if (s.includes(s[i])) {
         // if (s.indexOf(s[i]) !== (s.length - s.indexOf(dic[s[i]])))
