@@ -46,6 +46,7 @@ var isValid = (parantheses) => {
 };
 
 const compare = (i: number, counter: number, parantheses: string) => {
+    //determining to wrong string's place in whole string
     let firstIndex = i - (counter * 2)
     let lastIndex = i + (counter * 2) - 1
 
