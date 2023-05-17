@@ -7,11 +7,11 @@ const closings = ")]}"
 
 const brackets = {}
 brackets['('] = ')'
-brackets[')'] = '('
+brackets[')'] = ''
 brackets['['] = ']'
-brackets[']'] = '['
+brackets[']'] = ''          //Set if statements according to rules 
 brackets['{'] = '}'
-brackets['}'] = '{'
+brackets['}'] = ''
 
 
 //it is not good which has embedded loop but if 2 peer are true until that compare in second loop...
@@ -28,6 +28,9 @@ var isValid = (parantheses) => {
     let counter = 0;
     for (let i = 0; i < parantheses.length; i += 2) {
         if (closings.includes(parantheses[i])) {
+            if (closings.includes(parantheses[i]) && counter == 0)
+                return false
+
             const comparing = compare(i, counter, parantheses);
             if (!comparing)
                 return false
@@ -53,6 +56,7 @@ const compare = (i: number, counter: number, parantheses: string) => {
     while (lastIndex > firstIndex) {
         if (brackets[parantheses[lastIndex]] !== parantheses[firstIndex])
             return false
+
         lastIndex--
         firstIndex++
     }
