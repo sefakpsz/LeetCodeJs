@@ -3,8 +3,6 @@
  * @return {boolean}
  */
 
-const openings = "([{"
-
 const closings = ")]}"
 
 const brackets = {}
@@ -21,6 +19,10 @@ brackets['}'] = '{'
 var isValid = (parantheses) => {
     if (parantheses.length % 2 !== 0)
         return false
+
+    if (parantheses.length === 2)
+        if (parantheses[0] !== brackets[parantheses[1]])
+            return false
 
     //counter will be used to calculating of where is the peer of the current paranthes
     let counter = 0;
@@ -56,7 +58,7 @@ const compare = (i: number, counter: number, parantheses: string) => {
     return true
 }
 
-console.log(isValid("{[]}()[]{[({})]}()[]({})([([])])"))
+console.log(isValid("(){}}{")) // false
 
 //if (s.includes(s[i])) {
         // if (s.indexOf(s[i]) !== (s.length - s.indexOf(brackets[s[i]])))
