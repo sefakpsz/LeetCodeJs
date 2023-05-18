@@ -71,7 +71,7 @@ const compare = (i: number, counter: number, parantheses: string) => {
     return true
 }
 
-console.log(isValid("(([]){})")) // false 
+console.log(isValid("(([]){})"))
 
 //if (s.includes(s[i])) {
         // if (s.indexOf(s[i]) !== (s.length - s.indexOf(brackets[s[i]])))
