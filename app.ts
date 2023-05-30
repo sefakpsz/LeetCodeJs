@@ -41,4 +41,16 @@ var isValid = (parantheses) => {
     return true;
 };
 
+/*
+Suggestions from ChatGPT
+
+1.Remove unnecessary checks: The first part of your code checks if the length of the input string is 2 and performs some validations. 
+You can remove this check since it's already covered in the general logic of the function.
+
+2.Avoid string manipulation: In your current implementation, you modify the parantheses string by removing matching pairs of parentheses 
+using the substring function. String manipulation operations like this create new strings, 
+which can be expensive in terms of memory and runtime. Instead of modifying the string, 
+you can use a stack data structure to keep track of the open parentheses.
+*/
+
 console.log(isValid("(([]){}))"))
