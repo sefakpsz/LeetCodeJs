@@ -17,7 +17,7 @@ const addTwoNumbers = (l1: ListNode | null, l2: ListNode | null) => {
     let ten = 1
 
     let sum = 0
-    for (let index = ints.length - 1;index >= 0;index--) {
+    for (let index = 0;index < ints.length;index++) {
         ints[index] *= ten
         sum += ints[index]
         ten = ten * 10
@@ -29,7 +29,7 @@ const addTwoNumbers = (l1: ListNode | null, l2: ListNode | null) => {
     }
 
     ten = 1
-    for (let index = ints2.length - 1;index >= 0;index--) {
+    for (let index = 0;index < ints2.length;index++) {
         ints2[index] *= ten
         sum += ints2[index]
         ten = ten * 10
@@ -62,7 +62,14 @@ const push = (l: ListNode, nextValue: number, next: boolean): ListNode => {
     return newNode
 }
 
+//942+9465 then reverse
 addTwoNumbers(
     new ListNode(2, new ListNode(4, new ListNode(9))),
     new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(9))))
+)
+
+//100..001+465 then reverse
+addTwoNumbers(
+    new ListNode(1, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(1)))))))))))))))))))))),
+    new ListNode(5, new ListNode(6, new ListNode(4)))
 )
