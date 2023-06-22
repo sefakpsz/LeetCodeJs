@@ -25,19 +25,26 @@ function lengthOfLongestSubstring(s: string): number {
 
     for (let letter of s) {
         //that means if sub includes "letter"
+        let index = sub.indexOf(letter)
         if (sub.indexOf(letter) !== -1) {
-            if (subLength < sub.length) {
-                subLength = sub.length
-            }
-
-            sub = []
+            sub.splice(index - 1, 1)
+            sub.push(letter)
         }
         else {
             sub.push(letter)
         }
+
+        if (subLength < sub.length) {
+            subLength = sub.length
+        }
+    }
+
+    if (subLength < sub.length) {
+        subLength = sub.length
     }
 
     return subLength
 }
 
-console.log(lengthOfLongestSubstring("abcabcab"))
+console.log(lengthOfLongestSubstring("dvdf"))
+//" " "ay" "b" which doesn't work

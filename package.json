@@ -18,5 +18,9 @@
   "homepage": "https://github.com/sefakpsz14/leetcodeJS#readme",
   "dependencies": {
     "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0"
   }
 }
