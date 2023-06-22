@@ -25,9 +25,8 @@ function lengthOfLongestSubstring(s: string): number {
 
     for (let letter of s) {
         //that means if sub includes "letter"
-        let index = sub.indexOf(letter)
         if (sub.indexOf(letter) !== -1) {
-            sub.splice(index - 1, 1)
+            sub = []
             sub.push(letter)
         }
         else {
