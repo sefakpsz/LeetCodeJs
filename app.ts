@@ -33,4 +33,4 @@ console.log(lengthOfLongestSubstring("abcabcbbb")) //3
 console.log(lengthOfLongestSubstring("b")) //1
 console.log(lengthOfLongestSubstring(" ")) //1
 console.log(lengthOfLongestSubstring("de")) //2
-console.log(lengthOfLongestSubstring("ohvhjdml")) //6
+console.log(lengthOfLongestSubstring("ohvhjdml")) //6 
