@@ -1,29 +1,29 @@
-/**
- * @param {string} s
- * @return {boolean}
- */
+const longestPalindrome = (s: string): string => {
+    let tempArray = []
+    let palindromics = []
+    let reverseVersionOfTemp = []
 
-const dic = {};
-dic['('] = ')';
-dic[')'] = '(';
-dic['['] = ']';
-dic[']'] = '[';
-dic['{'] = '}';
-dic['}'] = '{';
+    //it needs to run s.length * s.length times and each s.length time need to start from one more than last value of i
 
-var isValid = function (s) {
-    for (let i = 0; i < s.length; i += 2) {
-        if (s.includes(s[i])) {
-            if (s.indexOf(s[i]) !== (s.length - s.indexOf(dic[s[i]])))
-                return false
+    for (let i = 0;i < s.length * s.length;i++) {
+        tempArray.push(s[i % s.length])
+
+        if (tempArray.length > 1) {
+            reverseVersionOfTemp = tempArray.slice().reverse()
+
+            if (tempArray.toString() === reverseVersionOfTemp.toString()) {
+                palindromics.push(tempArray.toString())
+            }
         }
 
-        //both of them could not be true either this or that
+        reverseVersionOfTemp = []
 
-        else if (s[i] !== dic[s[i + 1]])
-            return false;
+        if (i % s.length === 0)
+            tempArray = []
     }
-    return true;
-};
 
-console.log(isValid("{[]}"))
+    palindromics.forEach(s => console.log(s))
+    return null
+}
+
+longestPalindrome("ababbaba")
