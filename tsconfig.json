@@ -1,12 +1,14 @@
-// {
-//     "compilerOptions": {
-//       "target": "es6",
-//       "module": "commonjs",
-//       "outDir": "dist",
-//       "strict": true
-//     },
-//     "exclude": [
-//       "node_modules"
-//     ]
-//   }
-  
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "dist",
+        "strict": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "lib": [
+        "es2022"
+    ]
+}
