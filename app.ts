@@ -53,32 +53,60 @@ const library: { [key: number]: string } = {
     26: 'Z',
 }
 
+// 26^3 17 576
+// 26^4 456 976
+// 26^5 11 991 376
+// 26^6 308 915 776
+
 const func = (num: number): string => {
-    let sum = ""
-    if (num > 26) {
-        let power = num % 26 // 2
 
-        let second = library[power === 0 ? 1 : power] // B
+    let util = 1
+    let multiply = 0
+    let subsNums = []
 
-        let first
-        if (num - power > 26)
-            first = library[Math.sqrt(num - power)]
-        else
-            first = library[num - power - 25]
+    for (let i = 26;i > 0;i--) {
+        if (i > num)
+            continue
 
+        while (util > num) {
+            util *= i
+            multiply++
+        }
 
-        sum = first + second
+        subsNums.push(util)
+        util = 1
+
     }
-    else {
-        sum = library[num]
-    }
+
+    // let sum = ""
+    // if (num > 26) {
+    //     let power = num % 26 // 2
+
+    //     let second = library[power === 0 ? 1 : power] // B
+
+    //     let first
+    //     if (num - power > 26)
+    //         first = library[Math.sqrt(num - power)]
+    //     else
+    //         first = library[num - power - 25]
 
 
-    return sum
+    //     sum = first + second
+    // }
+    // else {
+    //     sum = library[num]
+    // }
+
+
+    // return sum
+
+    return ""
 }
-console.log(func(27))
-console.log(func(28))
-console.log(func(26))
-console.log(func(1))
-console.log(func(701))
-console.log(func(649))
+console.log(func(27)) //AA26*
+console.log(func(28)) //AB
+console.log(func(26)) //Z
+console.log(func(1)) //A
+console.log(func(701)) //ZY
+console.log(func(649)) //YX
+console.log(func(1500)) //DDFAC
+console.log(func(1200)) //DCDEF
