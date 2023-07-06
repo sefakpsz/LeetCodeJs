@@ -2,9 +2,10 @@
   "name": "leetcode",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node app.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/sefakpsz14/leetcodeJS#readme",
   "dependencies": {
-    "typescript": "^5.0.4"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
   }
 }
