@@ -74,7 +74,6 @@ interface beforeFinalStringType {
 
 const func = (num: number): Array<beforeFinalStringType> => {
     const substracts: Array<subType> = []
-
     const lengthOfLib = library.length
 
     let beforeFinalString: Array<beforeFinalStringType> = []
@@ -91,11 +90,17 @@ const func = (num: number): Array<beforeFinalStringType> => {
             while (letterNum < num) {
                 letterNum *= i
                 timeOfMultiply++
+
+                if (letterNum * i > num)
+                    break
             }
 
-            letterNum /= i
             substracts.push({ letterNum, timeOfMultiply })
+            // letterNum = 1
+            // timeOfMultiply = 0
         }
+
+        console.log({ subs: substracts })
 
         const maxData = substracts.reduce((prev, current) => {
             return (prev.letterNum > current.letterNum) ? prev : current
@@ -103,7 +108,7 @@ const func = (num: number): Array<beforeFinalStringType> => {
 
         queue = maxData.timeOfMultiply
         num -= maxData.letterNum
-
+        console.log(`after substraction ${num}`)
         //letterNum = Math.log(maxData.letterNum)
 
         beforeFinalString.push({
