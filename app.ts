@@ -24,89 +24,102 @@ Input: columnNumber = 701
 Output: "ZY"
 */
 
-const library: { [key: number]: string } = {
-    1: 'A',
-    2: 'B',
-    3: 'C',
-    4: 'D',
-    5: 'E',
-    6: 'F',
-    7: 'G',
-    8: 'H',
-    9: 'I',
-    10: 'J',
-    11: 'K',
-    12: 'L',
-    13: 'M',
-    14: 'N',
-    15: 'O',
-    16: 'P',
-    17: 'Q',
-    18: 'R',
-    19: 'S',
-    20: 'T',
-    21: 'U',
-    22: 'V',
-    23: 'W',
-    24: 'X',
-    25: 'Y',
-    26: 'Z',
+interface numberString {
+    [key: string]: number
 }
+
+const library: Array<numberString> = [
+    { 'A': 1 },
+    { 'B': 2 },
+    { 'C': 3 },
+    { 'D': 4 },
+    { 'E': 5 },
+    { 'F': 6 },
+    { 'G': 7 },
+    { 'H': 8 },
+    { 'I': 9 },
+    { 'J': 10 },
+    { 'K': 11 },
+    { 'L': 12 },
+    { 'M': 13 },
+    { 'N': 14 },
+    { 'O': 15 },
+    { 'P': 16 },
+    { 'Q': 17 },
+    { 'R': 18 },
+    { 'S': 19 },
+    { 'T': 20 },
+    { 'U': 21 },
+    { 'V': 22 },
+    { 'W': 23 },
+    { 'X': 24 },
+    { 'Y': 25 },
+    { 'Z': 26 },
+]
 
 // 26^3 17 576
 // 26^4 456 976
 // 26^5 11 991 376
 // 26^6 308 915 776
 
-const func = (num: number): string => {
+interface subType {
+    letterNum: number,
+    timeOfMultiply: number
+}
 
-    let util = 1
-    let multiply = 0
-    let subsNums = []
+interface beforeFinalStringType {
+    letter: string,
+    queue: number
+}
 
-    for (let i = 26;i > 0;i--) {
-        if (i > num)
-            continue
+const func = (num: number): Array<beforeFinalStringType> => {
+    const substracts: Array<subType> = []
 
-        while (util > num) {
-            util *= i
-            multiply++
+    const lengthOfLib = library.length
+
+    let beforeFinalString: Array<beforeFinalStringType> = []
+
+    let letterNum = 1
+    let timeOfMultiply = 0
+    let queue = lengthOfLib
+
+    while (num > 0) {
+        for (let i = lengthOfLib;i > 0;i--) {
+            if (i > num)
+                continue
+
+            while (letterNum < num) {
+                letterNum *= i
+                timeOfMultiply++
+            }
+
+            letterNum /= i
+            substracts.push({ letterNum, timeOfMultiply })
         }
 
-        subsNums.push(util)
-        util = 1
+        const maxData = substracts.reduce((prev, current) => {
+            return (prev.letterNum > current.letterNum) ? prev : current
+        })
 
+        queue = maxData.timeOfMultiply
+        num -= maxData.letterNum
+
+        //letterNum = Math.log(maxData.letterNum)
+
+        beforeFinalString.push({
+            queue: maxData.timeOfMultiply,
+            letter: library[Math.pow(maxData.letterNum, 1 / maxData.timeOfMultiply).toFixed()]
+        })
     }
 
-    // let sum = ""
-    // if (num > 26) {
-    //     let power = num % 26 // 2
-
-    //     let second = library[power === 0 ? 1 : power] // B
-
-    //     let first
-    //     if (num - power > 26)
-    //         first = library[Math.sqrt(num - power)]
-    //     else
-    //         first = library[num - power - 25]
-
-
-    //     sum = first + second
-    // }
-    // else {
-    //     sum = library[num]
-    // }
-
-
-    // return sum
-
-    return ""
+    return beforeFinalString
 }
-console.log(func(27)) //AA26*
-console.log(func(28)) //AB
-console.log(func(26)) //Z
-console.log(func(1)) //A
-console.log(func(701)) //ZY
-console.log(func(649)) //YX
-console.log(func(1500)) //DDFAC
-console.log(func(1200)) //DCDEF
+
+console.log(func(27)) //AA
+// console.log(func(28)) //AB
+// console.log(func(26)) //Z
+// console.log(func(1)) //A
+// console.log(func(701)) //ZY
+// console.log(func(649)) //YX
+// console.log(func(1500)) //DDFAC
+// console.log(func(1200)) //DCDEF
