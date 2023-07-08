@@ -72,7 +72,7 @@ interface beforeFinalStringType {
     queue: number
 }
 
-const func = (num: number): Array<beforeFinalStringType> => {
+const func1 = (num: number): Array<beforeFinalStringType> => {
     const substracts: Array<subType> = []
     const lengthOfLib = library.length
 
@@ -120,11 +120,45 @@ const func = (num: number): Array<beforeFinalStringType> => {
     return beforeFinalString
 }
 
-console.log(func(27)) //AA
+//console.log(func(27)) //AA
 // console.log(func(28)) //AB
 // console.log(func(26)) //Z
 // console.log(func(1)) //A
 // console.log(func(701)) //ZY
 // console.log(func(649)) //YX
-// console.log(func(1500)) //DDFAC
-// console.log(func(1200)) //DCDEF
+// console.log(func(1500)) //BER
+// console.log(func(1200)) //ATD
+// console.log(func(900)) //AEP
+
+
+/*
+ZZ --> 702 
+  A   A   A --> 703
+ 676  26  1
+first A -> 1
+second A -> 26
+703 - 27 -> 676
+
+*/
+
+console.log(1500 % 26)
+
+const max = 18278
+
+const func2 = (num: number) => {
+    const divider = 26
+
+    let lastString = ""
+
+    let result = num % divider
+
+    lastString += library[result]
+
+    num -= result
+
+    let howMany26 = num / 26
+
+    for (let i = 1;i < 26;i++) {
+        if (i * 26)        
+    }
+}
