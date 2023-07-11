@@ -103,4 +103,11 @@ const func2 = (num: number) => {
 
 //18278 ZZZ
 
-func2(18277)
+//func2(18277)
+
+console.log(25000 % 26, 25000 - 25000 % 26, (25000 - (25000 % 26)) / 26)
+console.log(52 * 18)
+console.log(961 - 936)
+
+console.log(52 * 17)
+console.log(961 - 884)
