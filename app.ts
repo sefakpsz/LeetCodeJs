@@ -57,108 +57,50 @@ const library: Array<numberString> = [
     { 'Z': 26 },
 ]
 
-// 26^3 17 576
-// 26^4 456 976
-// 26^5 11 991 376
-// 26^6 308 915 776
+const func2 = (num: number) => {
+    const str = []
 
-interface subType {
-    letterNum: number,
-    timeOfMultiply: number
-}
+    const valueOfZ = 26
 
-interface beforeFinalStringType {
-    letter: string,
-    queue: number
-}
+    const remainder = num % valueOfZ - 1
+    str.push(library[remainder === -1 ? valueOfZ - 1 : remainder]) // as last letter
 
-const func1 = (num: number): Array<beforeFinalStringType> => {
-    const substracts: Array<subType> = []
-    const lengthOfLib = library.length
+    num = num === valueOfZ ? num - valueOfZ : num - num % valueOfZ
 
-    let beforeFinalString: Array<beforeFinalStringType> = []
+    const divider = num / valueOfZ
 
-    let letterNum = 1
-    let timeOfMultiply = 0
-    let queue = lengthOfLib
+    if (divider <= valueOfZ && divider !== 0) {
+        str.push(library[divider - 1])
+    }
+    else if (
+        divider > valueOfZ &&
+        divider <= valueOfZ * valueOfZ + valueOfZ
+    ) {
+        let substractor = valueOfZ
+        let firstLetter
+        let middleLetter
 
-    while (num > 0) {
-        for (let i = lengthOfLib;i > 0;i--) {
-            if (i > num)
-                continue
-
-            while (letterNum < num) {
-                letterNum *= i
-                timeOfMultiply++
-
-                if (letterNum * i > num)
-                    break
+        for (let i = 1;i <= valueOfZ;i++) {
+            if (substractor * i > divider) {
+                firstLetter = library[i - 1 - 1]
+                substractor *= i - 1
+                break
+            } else if (i === substractor) {
+                firstLetter = library[i - 1]
+                substractor *= i
             }
-
-            substracts.push({ letterNum, timeOfMultiply })
-            // letterNum = 1
-            // timeOfMultiply = 0
         }
 
-        console.log({ subs: substracts })
+        middleLetter = library[divider - substractor - 1]
 
-        const maxData = substracts.reduce((prev, current) => {
-            return (prev.letterNum > current.letterNum) ? prev : current
-        })
-
-        queue = maxData.timeOfMultiply
-        num -= maxData.letterNum
-        console.log(`after substraction ${num}`)
-        //letterNum = Math.log(maxData.letterNum)
-
-        beforeFinalString.push({
-            queue: maxData.timeOfMultiply,
-            letter: library[Math.pow(maxData.letterNum, 1 / maxData.timeOfMultiply).toFixed()]
-        })
+        str.push(middleLetter)
+        str.push(firstLetter)
     }
 
-    return beforeFinalString
+
+    console.log(str.reverse())
 }
 
-//console.log(func(27)) //AA
-// console.log(func(28)) //AB
-// console.log(func(26)) //Z
-// console.log(func(1)) //A
-// console.log(func(701)) //ZY
-// console.log(func(649)) //YX
-// console.log(func(1500)) //BER
-// console.log(func(1200)) //ATD
-// console.log(func(900)) //AEP
+//18278 ZZZ
 
-
-/*
-ZZ --> 702 
-  A   A   A --> 703
- 676  26  1
-first A -> 1
-second A -> 26
-703 - 27 -> 676
-
-*/
-
-console.log(1500 % 26)
-
-const max = 18278
-
-const func2 = (num: number) => {
-    const divider = 26
-
-    let lastString = ""
-
-    let result = num % divider
-
-    lastString += library[result]
-
-    num -= result
-
-    let howMany26 = num / 26
-
-    for (let i = 1;i < 26;i++) {
-        if (i * 26)        
-    }
-}
+func2(18277)
