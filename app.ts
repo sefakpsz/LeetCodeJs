@@ -118,15 +118,22 @@ const convertToTitle2 = (columnNumber: number): string => {
 }
 
 const convertToTitle = (columnNumber: number): string => {
-    if (columnNumber <= 26) {
-        return JSON.stringify(library[columnNumber - 1])[2]
-    }
+    const valueOfZ = 26
 
-    let value = (columnNumber - columnNumber % 26) / 26
+    // if (columnNumber <= valueOfZ) {
+    //     return JSON.stringify(library[columnNumber - 1])[2]
+    // }
+
+    const remainder =
+        columnNumber % valueOfZ === 0
+            ? valueOfZ
+            : columnNumber % valueOfZ
+
+    let value = (columnNumber - (remainder)) / valueOfZ
 
     const valueOfSteps = [1, 26, 676, 17576, 456976, 11881376, 308915776]
 
-    const valueOfFirstPlace = columnNumber % 26
+    const valueOfFirstPlace = remainder
 
     let startPoint = 0
     for (let index = 0;index < valueOfSteps.length;index++) {
@@ -141,6 +148,24 @@ const convertToTitle = (columnNumber: number): string => {
         }
     }
 
+
+    /*
+    
+    1 A
+    2 B
+    3 C
+    4 AA
+    5 AB
+    6 AC
+    7 BA
+    8 BB
+    9 BC
+    10 CA
+    11 CB
+    12 CC* 
+    13 AAA
+    
+    */
     let resultString = ""
     for (let index = startPoint;index >= 0;index--) {
 
@@ -157,12 +182,11 @@ const convertToTitle = (columnNumber: number): string => {
                 break
             }
         }
-
         value -= numberOfMultiply * compareValue
-        if (numberOfMultiply !== 0)
+        if (numberOfMultiply !== 0) {
             resultString += JSON.stringify(library[numberOfMultiply - 1])[2]
+        }
     }
-
     resultString += JSON.stringify(library[valueOfFirstPlace - 1])[2]
 
     return resultString
@@ -175,6 +199,6 @@ const convertToTitle = (columnNumber: number): string => {
 //console.log(convertToTitle(1500)) //BER
 //console.log(convertToTitle(1200)) //ATD
 //console.log(convertToTitle(703)) //AAA
-console.log(convertToTitle(18278)) //ZZZ 🚨
-//console.log(convertToTitle(701)) //ZY 🚨AY
+//console.log(convertToTitle(18278)) //ZZZ 🚨AAZ
+console.log(convertToTitle(701)) //ZY 🚨AY
 //console.log(convertToTitle(2147483647)) //FXSHRXW
