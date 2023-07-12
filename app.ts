@@ -118,6 +118,10 @@ const convertToTitle2 = (columnNumber: number): string => {
 }
 
 const convertToTitle = (columnNumber: number): string => {
+    if (columnNumber <= 26) {
+        return JSON.stringify(library[columnNumber - 1])[2]
+    }
+
     let value = (columnNumber - columnNumber % 26) / 26
 
     const valueOfSteps = [1, 26, 676, 17576, 456976, 11881376, 308915776]
@@ -164,13 +168,13 @@ const convertToTitle = (columnNumber: number): string => {
     return resultString
 }
 
-// console.log(convertToTitle(1)) //A
-//console.log(convertToTitle(26)) //🚨
+//console.log(convertToTitle(1)) //A
+//console.log(convertToTitle(26)) //Z
 //console.log(convertToTitle(27)) //AA
 //console.log(convertToTitle(28)) //AB
 //console.log(convertToTitle(1500)) //BER
 //console.log(convertToTitle(1200)) //ATD
 //console.log(convertToTitle(703)) //AAA
-//console.log(convertToTitle(18278)) //ZZZ
+console.log(convertToTitle(18278)) //ZZZ 🚨
 //console.log(convertToTitle(701)) //ZY 🚨AY
-console.log(convertToTitle(2147483647)) //FXSHRXW
+//console.log(convertToTitle(2147483647)) //FXSHRXW
