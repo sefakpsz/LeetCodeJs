@@ -57,17 +57,31 @@ const library: Array<numberString> = [
     { 'Z': 26 },
 ]
 
-const func2 = (num: number) => {
+
+/*
+8 --> 308 915 776
+7 --> 11 881 376
+6 --> 456 976
+5 --> 17 576
+4 --> 676
+3 --> 26
+2 --> 1
+1 --> 0
+
+Max value of letter is 'F' for eigth step
+*/
+
+const convertToTitle2 = (columnNumber: number): string => {
     const str = []
 
     const valueOfZ = 26
 
-    const remainder = num % valueOfZ - 1
+    const remainder = columnNumber % valueOfZ - 1
     str.push(library[remainder === -1 ? valueOfZ - 1 : remainder]) // as last letter
 
-    num = num === valueOfZ ? num - valueOfZ : num - num % valueOfZ
+    columnNumber = columnNumber === valueOfZ ? columnNumber - valueOfZ : columnNumber - columnNumber % valueOfZ
 
-    const divider = num / valueOfZ
+    const divider = columnNumber / valueOfZ
 
     if (divider <= valueOfZ && divider !== 0) {
         str.push(library[divider - 1])
@@ -98,16 +112,65 @@ const func2 = (num: number) => {
     }
 
 
-    console.log(str.reverse())
+    let result = ""
+    str.reverse().forEach(s => result += JSON.stringify(s as any)[2])
+    return result
 }
 
-//18278 ZZZ
+const convertToTitle = (columnNumber: number): string => {
+    let value = (columnNumber - columnNumber % 26) / 26
 
-//func2(18277)
+    const valueOfSteps = [1, 26, 676, 17576, 456976, 11881376, 308915776]
 
-console.log(25000 % 26, 25000 - 25000 % 26, (25000 - (25000 % 26)) / 26)
-console.log(52 * 18)
-console.log(961 - 936)
+    const valueOfFirstPlace = columnNumber % 26
 
-console.log(52 * 17)
-console.log(961 - 884)
+    let startPoint = 0
+    for (let index = 0;index < valueOfSteps.length;index++) {
+        if (index === valueOfSteps.length - 1) {
+            if (value > valueOfSteps[index]) {
+                startPoint = valueOfSteps.length
+                break
+            }
+        } else if (value >= valueOfSteps[index] && value < valueOfSteps[index + 1]) {
+            startPoint = index + 1
+            break
+        }
+    }
+
+    let resultString = ""
+    for (let index = startPoint;index >= 0;index--) {
+
+        let compareValue = valueOfSteps[index - 1]
+
+        let numberOfMultiply = 0
+
+        for (let index = 1;index < 26;index++) {
+            if (compareValue * index > value) {
+                numberOfMultiply = index - 1
+                break
+            } else if (compareValue * index === value) {
+                numberOfMultiply = index
+                break
+            }
+        }
+
+        value -= numberOfMultiply * compareValue
+        if (numberOfMultiply !== 0)
+            resultString += JSON.stringify(library[numberOfMultiply - 1])[2]
+    }
+
+    resultString += JSON.stringify(library[valueOfFirstPlace - 1])[2]
+
+    return resultString
+}
+
+// console.log(convertToTitle(1)) //A
+//console.log(convertToTitle(26)) //🚨
+//console.log(convertToTitle(27)) //AA
+//console.log(convertToTitle(28)) //AB
+//console.log(convertToTitle(1500)) //BER
+//console.log(convertToTitle(1200)) //ATD
+//console.log(convertToTitle(703)) //AAA
+//console.log(convertToTitle(18278)) //ZZZ
+//console.log(convertToTitle(701)) //ZY 🚨AY
+console.log(convertToTitle(2147483647)) //FXSHRXW
