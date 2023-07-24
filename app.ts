@@ -159,20 +159,22 @@ const convertToTitle = (columnNumber: number): string => {
 
         for (let index = 1;index <= 26;index++) {
             if (compareValue * index > value) {
-                numberOfMultiply = (index - 1) * Math.pow(26, resultString.length + 1)
-                if (numberOfMultiply > valueOfZ) {
-                    numberOfMultiply %= valueOfZ
-                    if (numberOfMultiply === 0)
-                        numberOfMultiply = valueOfZ
-                }
+                numberOfMultiply = (index - 1)
+                // * Math.pow(26, resultString.length + 1)
+                // if (numberOfMultiply > valueOfZ) {
+                //     numberOfMultiply %= valueOfZ
+                //     if (numberOfMultiply === 0)
+                //         numberOfMultiply = valueOfZ
+                // }
                 break
             } else if (compareValue * index === value) {
-                numberOfMultiply = index * Math.pow(26, resultString.length + 1)
-                if (numberOfMultiply > valueOfZ) {
-                    numberOfMultiply %= valueOfZ
-                    if (numberOfMultiply === 0)
-                        numberOfMultiply = valueOfZ
-                }
+                numberOfMultiply = index
+                // * Math.pow(26, resultString.length + 1)
+                // if (numberOfMultiply > valueOfZ) {
+                //     numberOfMultiply %= valueOfZ
+                //     if (numberOfMultiply === 0)
+                //         numberOfMultiply = valueOfZ
+                // }
                 break
             }
         }
