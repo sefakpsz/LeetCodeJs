@@ -25,37 +25,37 @@ Output: "ZY"
 */
 
 interface numberString {
-    [key: string]: number
+    [key: number]: string
 }
 
-const library: Array<numberString> = [
-    { 'A': 1 },
-    { 'B': 2 },
-    { 'C': 3 },
-    { 'D': 4 },
-    { 'E': 5 },
-    { 'F': 6 },
-    { 'G': 7 },
-    { 'H': 8 },
-    { 'I': 9 },
-    { 'J': 10 },
-    { 'K': 11 },
-    { 'L': 12 },
-    { 'M': 13 },
-    { 'N': 14 },
-    { 'O': 15 },
-    { 'P': 16 },
-    { 'Q': 17 },
-    { 'R': 18 },
-    { 'S': 19 },
-    { 'T': 20 },
-    { 'U': 21 },
-    { 'V': 22 },
-    { 'W': 23 },
-    { 'X': 24 },
-    { 'Y': 25 },
-    { 'Z': 26 },
-]
+const library: numberString = {
+    1: "A",
+    2: 'B',
+    3: 'C',
+    4: 'D',
+    5: 'E',
+    6: 'F',
+    7: 'G',
+    8: 'H',
+    9: 'I',
+    10: 'J',
+    11: 'K',
+    12: 'L',
+    13: 'M',
+    14: 'N',
+    15: 'O',
+    16: 'P',
+    17: 'Q',
+    18: 'R',
+    19: 'S',
+    20: 'T',
+    21: 'U',
+    22: 'V',
+    23: 'W',
+    24: 'X',
+    25: 'Y',
+    26: 'Z',
+}
 
 
 /*
@@ -121,7 +121,7 @@ const convertToTitle = (columnNumber: number): string => {
     const valueOfZ = 26
 
     // if (columnNumber <= valueOfZ) {
-    //     return JSON.stringify(library[columnNumber - 1])[2]
+    //     return library[columnNumber]
     // }
 
     const remainder =
@@ -151,20 +151,27 @@ const convertToTitle = (columnNumber: number): string => {
 
     /*
     
-    1 A
-    2 B
-    3 C
-    4 AA
-    5 AB
-    6 AC
-    7 BA
-    8 BB
-    9 BC
-    10 CA
-    11 CB
-    12 CC* 
-    13 AAA
-    
+    1 A        21 ACC 
+    2 B        22 BAA 
+    3 C        23 BAB  
+    4 AA       24 BAC 
+    5 AB       25 BBA 
+    6 AC       26 BBB   
+    7 BA       27 BBC 
+    8 BB       28 BCA  
+    9 BC       29 BCB  
+    10 CA      30 BCC   
+    11 CB      31 CAA 
+    12 CC      32 CAB   
+    13 AAA     33 CAC  
+    14 AAB     34 CBA  
+    15 AAC     35 CBB  
+    16 ABA     36 CBC  
+    17 ABB     37 CCA  
+    18 ABC     38 CCB 
+    19 ACA     39 CCC   
+    20 ACB     40 AAAA    
+     
     */
     let resultString = ""
     for (let index = startPoint;index >= 0;index--) {
@@ -184,10 +191,10 @@ const convertToTitle = (columnNumber: number): string => {
         }
         value -= numberOfMultiply * compareValue
         if (numberOfMultiply !== 0) {
-            resultString += JSON.stringify(library[numberOfMultiply - 1])[2]
+            resultString += library[numberOfMultiply]
         }
     }
-    resultString += JSON.stringify(library[valueOfFirstPlace - 1])[2]
+    resultString += library[valueOfFirstPlace]
 
     return resultString
 }
