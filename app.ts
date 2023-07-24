@@ -120,9 +120,9 @@ const convertToTitle2 = (columnNumber: number): string => {
 const convertToTitle = (columnNumber: number): string => {
     const valueOfZ = 26
 
-    // if (columnNumber <= valueOfZ) {
-    //     return library[columnNumber]
-    // }
+    if (columnNumber <= valueOfZ) {
+        return library[columnNumber]
+    }
 
     const remainder =
         columnNumber % valueOfZ === 0
@@ -131,65 +131,53 @@ const convertToTitle = (columnNumber: number): string => {
 
     let value = (columnNumber - (remainder)) / valueOfZ
 
-    const valueOfSteps = [1, 26, 676, 17576, 456976, 11881376, 308915776]
-
     const valueOfFirstPlace = remainder
 
     let startPoint = 0
-    for (let index = 0;index < valueOfSteps.length;index++) {
-        if (index === valueOfSteps.length - 1) {
-            if (value > valueOfSteps[index]) {
-                startPoint = valueOfSteps.length
+    //6 means constraint of algorithm --> 26^6 is the limit.
+    for (let index = 0;index < 6;index++) {
+        if (index === 5) {
+            if (value > Math.pow(26, index)) {
+                startPoint = 6
                 break
             }
-        } else if (value >= valueOfSteps[index] && value < valueOfSteps[index + 1]) {
-            startPoint = index + 1
+        } else if (value >= Math.pow(26, index) && value < Math.pow(26, index + 1)) {
+            startPoint = index
+            break
+        } else if (value === Math.pow(26, index + 1)) {
+            startPoint = index
             break
         }
     }
 
-
-    /*
-    
-    1 A        21 ACC 
-    2 B        22 BAA 
-    3 C        23 BAB  
-    4 AA       24 BAC 
-    5 AB       25 BBA 
-    6 AC       26 BBB   
-    7 BA       27 BBC 
-    8 BB       28 BCA  
-    9 BC       29 BCB  
-    10 CA      30 BCC   
-    11 CB      31 CAA 
-    12 CC      32 CAB   
-    13 AAA     33 CAC  
-    14 AAB     34 CBA  
-    15 AAC     35 CBB  
-    16 ABA     36 CBC  
-    17 ABB     37 CCA  
-    18 ABC     38 CCB 
-    19 ACA     39 CCC   
-    20 ACB     40 AAAA    
-     
-    */
     let resultString = ""
     for (let index = startPoint;index >= 0;index--) {
 
-        let compareValue = valueOfSteps[index - 1]
+        let compareValue = Math.pow(26, index)
 
         let numberOfMultiply = 0
 
-        for (let index = 1;index < 26;index++) {
+        for (let index = 1;index <= 26;index++) {
             if (compareValue * index > value) {
-                numberOfMultiply = index - 1
+                numberOfMultiply = (index - 1) * Math.pow(26, resultString.length + 1)
+                if (numberOfMultiply > valueOfZ) {
+                    numberOfMultiply %= valueOfZ
+                    if (numberOfMultiply === 0)
+                        numberOfMultiply = valueOfZ
+                }
                 break
             } else if (compareValue * index === value) {
-                numberOfMultiply = index
+                numberOfMultiply = index * Math.pow(26, resultString.length + 1)
+                if (numberOfMultiply > valueOfZ) {
+                    numberOfMultiply %= valueOfZ
+                    if (numberOfMultiply === 0)
+                        numberOfMultiply = valueOfZ
+                }
                 break
             }
         }
-        value -= numberOfMultiply * compareValue
+
+        value -= (numberOfMultiply / valueOfZ) * compareValue
         if (numberOfMultiply !== 0) {
             resultString += library[numberOfMultiply]
         }
@@ -199,13 +187,38 @@ const convertToTitle = (columnNumber: number): string => {
     return resultString
 }
 
-//console.log(convertToTitle(1)) //A
-//console.log(convertToTitle(26)) //Z
-//console.log(convertToTitle(27)) //AA
-//console.log(convertToTitle(28)) //AB
-//console.log(convertToTitle(1500)) //BER
-//console.log(convertToTitle(1200)) //ATD
-//console.log(convertToTitle(703)) //AAA
-//console.log(convertToTitle(18278)) //ZZZ 🚨AAZ
+console.log(convertToTitle(1)) //A
+console.log(convertToTitle(26)) //Z
+console.log(convertToTitle(27)) //AA
+console.log(convertToTitle(28)) //AB
+console.log(convertToTitle(1500)) //BER
+console.log(convertToTitle(1200)) //ATD
+console.log(convertToTitle(703)) //AAA
+console.log(convertToTitle(18278)) //ZZZ 🚨AAZ
 console.log(convertToTitle(701)) //ZY 🚨AY
-//console.log(convertToTitle(2147483647)) //FXSHRXW
+// console.log(convertToTitle(2147483647)) //FXSHRXW
+
+
+/*
+    1 A        21 ACC
+    2 B        22 BAA
+    3 C        23 BAB
+    4 AA       24 BAC
+    5 AB       25 BBA
+    6 AC       26 BBB
+    7 BA       27 BBC
+    8 BB       28 BCA
+    9 BC       29 BCB
+    10 CA      30 BCC
+    11 CB      31 CAA
+    12 CC      32 CAB
+    13 AAA     33 CAC
+    14 AAB     34 CBA
+    15 AAC     35 CBB
+    16 ABA     36 CBC
+    17 ABB     37 CCA
+    18 ABC     38 CCB
+    19 ACA     39 CCC
+    20 ACB     40 AAAA
+*/
+    //const valueOfSteps = [1, 26, 676, 17576, 456976, 11881376, 308915776]
